@@ -2,9 +2,6 @@ import pygame,sys
 from settings import *
 from support import import_folder
 from entity import Entity
-from time import sleep
-import subprocess
-from tkinter import messagebox
 
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack,create_magic):
@@ -211,33 +208,15 @@ class Player(Entity):
     def check_death(self):
         if self.health <= 0:
             self.kill()
-            sleep(0.5)
-            pygame.quit()
-            try:
-                subprocess.run(["python", "popup.py"])
-            except Exception as e:
-                messagebox.showerror("Error", f"Failed to run popup.py: {e}")
+            pygame.event.post(pygame.event.Event(GAME_OVER_EVENT))
 
     def check_win(self):
         if self.score >= 630:
-            sleep(0.5)
-            pygame.quit()    
-            try:
-                subprocess.run(["python","won.py"])
-                sys.exit()
-            except Exception as e:
-                messagebox.showinfo("Error",f"Failed to run won.py: {e}")
+            pygame.event.post(pygame.event.Event(LEVEL_COMPLETE_EVENT))
 
     def check_win2(self):
         if self.score2 >= 920:
-            sleep(0.5)
-            pygame.quit()
-        
-            try:
-                subprocess.run(["python","end.py"])
-                sys.exit()
-            except Exception as e:
-                messagebox.showinfo("Error",f"Failed to run end.py: {e}")
+            pygame.event.post(pygame.event.Event(GAME_COMPLETE_EVENT))
 
     def update(self):
         self.input()

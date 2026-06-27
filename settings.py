@@ -1,4 +1,6 @@
 
+import pygame
+
 WIDTH    = 1280
 HEIGHT   = 720
 FPS      = 60
@@ -14,8 +16,13 @@ BAR_HEIGHT = 20
 HEALTH_BAR_WIDTH = 200
 ENERGY_BAR_WIDTH = 140
 ITEM_BOX_SIZE = 80
-UI_FONT = 'D:\graphics\\font\joystix.ttf'
+UI_FONT = './graphics/font/joystix.ttf'
 UI_FONT_SIZE = 18
+
+# Custom game-flow events used by the browser-friendly Pygame shell.
+GAME_OVER_EVENT = pygame.USEREVENT + 1
+LEVEL_COMPLETE_EVENT = pygame.USEREVENT + 2
+GAME_COMPLETE_EVENT = pygame.USEREVENT + 3
 
 # general colors
 WATER_COLOR = '#71ddee'
